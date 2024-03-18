@@ -15,6 +15,9 @@ class Piece:
     bQ = 11
     bK = 12
 
+    promoted_pieces={
+        0:'',1:'P',2:'R',3:'N',4:'B',5:'Q',6:'K'
+    }
     piece_map = {
             'P': 'white_P',
             'N': 'white_N',
