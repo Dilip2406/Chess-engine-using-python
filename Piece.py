@@ -32,6 +32,21 @@ class Piece:
             'q': 'black_Q',
             'k': 'black_K'
         }
+    pieces={
+        wP:'white_P',
+        wR:'white_R',
+        wN:'white_N',
+        wB:'white_B',
+        wQ:'white_Q',
+        wK:'white_K',
+        bP:'black_P',
+        bR:'black_R',
+        bN:'black_N',
+        bB:'black_B',
+        bQ:'black_Q',
+        bK:'black_K'
+        
+    }
 
     white_pieces = {wP, wR, wN, wB, wQ, wK}
     black_pieces = {bP, bR, bN, bB, bQ, bK}

@@ -1,6 +1,6 @@
 import numpy as np
 
-from Color import *
+
 from Constants import *
 
 

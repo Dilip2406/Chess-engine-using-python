@@ -1,7 +1,6 @@
 import numpy as np
 from Bitboard_helpers import *
-from Piece import *
-from Color import *
+
 from fen import generate_fen
 from Constants import *
 
@@ -30,6 +29,14 @@ class Board:
     def Piece_bb(self):
         Piece_bb={Piece.wP:self.white_P,Piece.wR:self.white_R,Piece.wN:self.white_N,Piece.wB:self.white_B,Piece.wQ:self.white_Q,Piece.wK:self.white_K,Piece.bP:self.black_P,Piece.bR:self.black_R,Piece.bN:self.black_N,Piece.bB:self.black_B,Piece.bQ:self.black_Q,Piece.bK:self.black_K}
         return Piece_bb  
+    
+    @property
+    def black_pieces_dict(self):
+        return {Piece.bP:self.black_P,Piece.bR:self.black_R,Piece.bN:self.black_N,Piece.bB:self.black_B,Piece.bQ:self.black_Q,Piece.bK:self.black_K}
+    
+    @property
+    def white_pieces_dict(self):
+        return {Piece.wP:self.white_P,Piece.wR:self.white_R,Piece.wN:self.white_N,Piece.wB:self.white_B,Piece.wQ:self.white_Q,Piece.wK:self.white_K}
     
     @property
     def white_pieces_bb(self):
@@ -96,6 +103,10 @@ class Board:
                     file += int(symbol)
             rank += 1
             file = 0
+        if fen_parts[1]=='w':
+            self.color_to_move=Color.WHITE
+        else:
+            self.color_to_move=Color.BLACK
 
                 
 
@@ -154,22 +165,106 @@ class Board:
 
         print('   a b c d e f g h')
         print()
-    
 
-b = Board()
-b.initialize_board()
+    def is_in_check(self, square, side):
+        if side == 'white':
+            if get_pawn_attacks(square, 'black') & self.Piece_bb[Piece.wP]:
+                return True
+        else:
+            if get_pawn_attacks(square, 'white') & self.Piece_bb[Piece.bP]:
+                return True
+        if get_knight_attacks(square) & self.Piece_bb[Piece.wN if side == 'white' else Piece.bN]:
+            return True
+        if get_king_attacks(square) & self.Piece_bb[Piece.wK if side == 'white' else Piece.bK]:
+            return True
+        if get_bishop_attacks(square,self.occupancy_squares_bb) & (self.Piece_bb[Piece.wB if side=='white' else Piece.bB] | self.Piece_bb[Piece.wQ if side=='white' else Piece.bQ]):
+            return True
+        if get_rook_attacks(square,self.occupancy_squares_bb) & (self.Piece_bb[Piece.wR if side=='white' else Piece.bR] | self.Piece_bb[Piece.wQ if side=='white' else Piece.bQ]):
+            return True
+        return False
+    
+    def get_piece_on_square(self, square):
+        if self.white_B & (np.uint64(1) <<np.uint64(square)):
+            return "white_B"
+        elif self.white_K & (np.uint64(1) <<np.uint64(square)):
+            return "white_K"
+        elif self.white_N & (np.uint64(1) <<np.uint64(square)):
+            return "white_N"
+        elif self.white_P & (np.uint64(1) <<np.uint64(square)):
+            return "white_P"
+        elif self.white_Q & (np.uint64(1) <<np.uint64(square)):
+            return "white_Q"
+        elif self.white_R & (np.uint64(1) <<np.uint64(square)):
+            return "white_R"
+        elif self.black_B & (np.uint64(1) <<np.uint64(square)):
+            return "black_B"
+        elif self.black_K & (np.uint64(1) <<np.uint64(square)):
+            return "black_K"
+        elif self.black_N & (np.uint64(1) <<np.uint64(square)):
+            return "black_N"
+        elif self.black_P & (np.uint64(1) <<np.uint64(square)):
+            return "black_P"
+        elif self.black_Q & (np.uint64(1) <<np.uint64(square)):
+            return "black_Q"
+        elif self.black_R & (np.uint64(1) <<np.uint64(square)):
+            return "black_R"
+        
+        return None
+
+    def make_move(self, m,move):
+        new_board = Board()
+        new_board.white_R = self.white_R
+        new_board.white_N = self.white_N
+        new_board.white_B = self.white_B
+        new_board.white_Q = self.white_Q
+        new_board.white_K = self.white_K
+        new_board.white_P = self.white_P
+
+        new_board.black_R = self.black_R
+        new_board.black_N = self.black_N
+        new_board.black_B = self.black_B
+        new_board.black_Q = self.black_Q
+        new_board.black_K = self.black_K
+        new_board.black_P = self.black_P
+
+        new_board.color_to_move = self.color_to_move
+        source=m.get_move_src(move)
+        target=m.get_move_dest(move)
+
+        piece=new_board.get_piece_on_square(source)
+        target_piece=new_board.get_piece_on_square(target)
+        setattr(new_board,piece,pop_bit(getattr(new_board,piece),source))
+        if target_piece:
+            setattr(new_board,target_piece,pop_bit(getattr(new_board,target_piece),target))
+        setattr(new_board,piece,set_bit(getattr(new_board,piece),target))
+        if self.color_to_move==Color.WHITE:
+            if self.is_in_check(get_lsb(self.white_K),self.color_to_move):
+                return None
+            
+        elif self.color_to_move==Color.BLACK:
+            if self.is_in_check(get_lsb(self.white_K),self.color_to_move):
+                return None
+            
+        new_board.color_to_move=(new_board.color_to_move ^ 1)
+    
+        return new_board
+        
+
+new_board=Board()
 
 fen = "r1bk3r/p2pBpNp/n4n2/1p1NP2P/6P1/3P4/P1P1K3/q5b1 w KQkq - 0 0"
+new_board.update_from_fen(fen)
 
-b.update_from_fen(fen)
+new_board.print_board()
+print(new_board.is_square_attacked(32,'white'))
+
+piece=new_board.get_piece_on_square(43)
+print(piece)
+print_bitboard(getattr(new_board,piece))
+
+print_bitboard(pop_bit(getattr(new_board,piece),43))
 
 
-print_bitboard(b.white_pieces_bb | b.black_pieces_bb)
-
-b.print_board() 
-
-print(fen)
-print(fen==generate_fen(b))
 
 
 

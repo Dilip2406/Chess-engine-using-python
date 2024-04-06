@@ -1,0 +1,15 @@
+C:\Users\91914\Desktop\Chess-engine-using-python\bin\Debug\net8.0\Chess-engine-using-python.exe
+C:\Users\91914\Desktop\Chess-engine-using-python\bin\Debug\net8.0\Chess-engine-using-python.deps.json
+C:\Users\91914\Desktop\Chess-engine-using-python\bin\Debug\net8.0\Chess-engine-using-python.runtimeconfig.json
+C:\Users\91914\Desktop\Chess-engine-using-python\bin\Debug\net8.0\Chess-engine-using-python.dll
+C:\Users\91914\Desktop\Chess-engine-using-python\bin\Debug\net8.0\Chess-engine-using-python.pdb
+C:\Users\91914\Desktop\Chess-engine-using-python\obj\Debug\net8.0\Chess-engine-using-python.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\91914\Desktop\Chess-engine-using-python\obj\Debug\net8.0\Chess-engine-using-python.AssemblyInfoInputs.cache
+C:\Users\91914\Desktop\Chess-engine-using-python\obj\Debug\net8.0\Chess-engine-using-python.AssemblyInfo.cs
+C:\Users\91914\Desktop\Chess-engine-using-python\obj\Debug\net8.0\Chess-engine-using-python.csproj.CoreCompileInputs.cache
+C:\Users\91914\Desktop\Chess-engine-using-python\obj\Debug\net8.0\Chess-engine-using-python.sourcelink.json
+C:\Users\91914\Desktop\Chess-engine-using-python\obj\Debug\net8.0\Chess-engine-using-python.dll
+C:\Users\91914\Desktop\Chess-engine-using-python\obj\Debug\net8.0\refint\Chess-engine-using-python.dll
+C:\Users\91914\Desktop\Chess-engine-using-python\obj\Debug\net8.0\Chess-engine-using-python.pdb
+C:\Users\91914\Desktop\Chess-engine-using-python\obj\Debug\net8.0\Chess-engine-using-python.genruntimeconfig.cache
+C:\Users\91914\Desktop\Chess-engine-using-python\obj\Debug\net8.0\ref\Chess-engine-using-python.dll

@@ -3,6 +3,12 @@ import numpy as np
 def set_bit(bitboard, square):
         return bitboard | (np.uint64(1) << np.uint64(square))
 
+def pop_bit(bitboard, square):
+    return bitboard & ~(np.uint64(1) << np.uint64(square))
+
+def pop_lsb(bitboard):
+    return bitboard & (bitboard - np.uint64(1))
+
 def print_bitboard(bitboard):
     print("")
     for rank in range(8):
@@ -18,6 +24,20 @@ def print_bitboard(bitboard):
 
 def get_bit(bitboard,square):
     return (bitboard >> np.uint64(square)) & np.uint64(1)
+
+def get_lsb(bitboard):
+    board=int(bitboard)
+    if(board==0):
+        return -1
+    return count_bits(np.uint64((board & -board)-1))
+
+def count_bits(bitboard):
+    count=0
+    while bitboard:
+        count+=1
+        bitboard&=bitboard-np.uint64(1)
+    return count
+
 
 
 '''
@@ -37,7 +57,19 @@ def get_pawn_attacks(square, color):
         if (square % 8) < 7:
             attacks = set_bit(attacks, square - 7)
     return attacks
-    
+
+def get_pawn_pushes(square, color):
+    motion_bb=np.uint64(0)
+    if color == 'black':
+        motion_bb=set_bit(motion_bb, square + 8)
+        if square // 8 == 1:
+            motion_bb=set_bit(motion_bb, square + 16)
+    else:
+        motion_bb=set_bit(motion_bb, square - 8)
+        if square // 8 == 6:
+            motion_bb=set_bit(motion_bb, square - 16)
+    return motion_bb
+
 def get_knight_attacks(square):
     attacks = np.uint64(0)
     if square + 17 < 64 and (square % 8) < 7:
@@ -155,19 +187,16 @@ def get_queen_attacks(square, occupied):
     return get_rook_attacks(square, occupied) | get_bishop_attacks(square, occupied)
 
 
+
+
+
 ###block=set_bit(np.uint64(0), 57)
 #block=set_bit(block, 49)
 #print_bitboard(get_queen_attacks(56,block))
 
 
-board=np.uint64(0)
-block=np.uint64(0)
-block=set_bit(block,59)
-block=set_bit(block,35)
-board=get_rook_attacks(27,block)
-print_bitboard(block)
 
-print_bitboard(board)
+
 
 
 

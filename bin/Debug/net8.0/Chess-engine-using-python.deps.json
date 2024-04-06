@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Chess-engine-using-python/1.0.0": {
+        "runtime": {
+          "Chess-engine-using-python.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Chess-engine-using-python/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
