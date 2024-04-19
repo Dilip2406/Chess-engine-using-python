@@ -55,8 +55,8 @@ class Engine:
             if len(args)>1 and args[1]=="moves":
                 for move in args[2:]:
                     user_move=Move.encode_move(square_indices[move[0:2]],square_indices[move[2:4]],0,0)
-                    Move.print_move(user_move)
                     self.board=self.board.make_move(Move,user_move)
+                    ##self.board.print_board()
 
         if args[0]=="fen":
             self.board.update_from_fen(args[1:])

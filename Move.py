@@ -49,4 +49,11 @@ class Move:
         
 
                                 
-                            
+'''                            
+board=Board()
+board.initialize_board()
+board=board.make_move(Move,Move.encode_move(square_indices['e2'],square_indices['e4'],0,0))
+board.print_board()
+
+
+'''

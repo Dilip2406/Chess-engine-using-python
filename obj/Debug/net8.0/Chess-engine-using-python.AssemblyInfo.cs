@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Chess-engine-using-python")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1cbeb9faeb8aae0442c6ed7ae39eba120a98abd0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eede2bc3d50fdd3e6735c46888cf3172c923f719")]
 [assembly: System.Reflection.AssemblyProductAttribute("Chess-engine-using-python")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Chess-engine-using-python")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

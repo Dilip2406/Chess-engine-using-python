@@ -246,23 +246,12 @@ class Board:
                 return None
             
         new_board.color_to_move=(new_board.color_to_move ^ 1)
+       ## new_board.print_board()
     
         return new_board
         
 
-new_board=Board()
 
-fen = "r1bk3r/p2pBpNp/n4n2/1p1NP2P/6P1/3P4/P1P1K3/q5b1 w KQkq - 0 0"
-new_board.update_from_fen(fen)
-
-new_board.print_board()
-print(new_board.is_square_attacked(32,'white'))
-
-piece=new_board.get_piece_on_square(43)
-print(piece)
-print_bitboard(getattr(new_board,piece))
-
-print_bitboard(pop_bit(getattr(new_board,piece),43))
 
 
 
